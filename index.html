@@ -4,6 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity Web Player | HelixLike</title>
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+<script>
+  Pi.init({ version: "2.0" });
+</script>
   </head>
   <body style="text-align: center; padding: 0; border: 0; margin: 0;">
     <canvas id="unity-canvas" width=1080 height=1920 tabindex="-1" style="width: 1080px; height: 1920px; background: #231F20"></canvas>
@@ -41,5 +45,23 @@
         alert(message);
       });
     </script>
+    <script>
+  function piLogin() {
+    Pi.authenticate(
+      ['username'],
+      function (auth) {
+        unityInstance.SendMessage(
+          'HelixGame',
+          'OnPiLogin',
+          auth.user.username
+        );
+      },
+      function (error) {
+        console.error(error);
+      }
+    );
+  }
+</script>
+
   </body>
 </html>
